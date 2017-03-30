@@ -1,11 +1,12 @@
 {
   "Html": "/KitchenSink/TextPage.html",
 
-  "Name$": "",
-  "NameLive$": "",
 
+  "Name$": "",
   "NameReaction": "",
   "$NameReaction": { "Bind": "CalculatedNameReaction" },
-  "NameLiveReaction": "",
-  "$NameLiveReaction": { "Bind": "CalculatedNameLiveReaction" }
+
+  "NameLive$": "",
+  "XXX": "",
+  "$XXX": { "Bind": "CalculatedNameLiveReaction" }
 }

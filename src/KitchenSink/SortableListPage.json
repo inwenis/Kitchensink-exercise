@@ -1,0 +1,26 @@
+{
+  "Html": "/KitchenSink/SortableListPage.html",
+
+  "XYZInput$": "just some text",
+  "XYZReaction": "",
+  "$XYZReaction": { "Bind": "DoSomeOpetarions" },
+
+  "People": [
+    {
+      "Id": 0,
+      "Name": "",
+      "ButtonUp$": 0,
+      "ButtonDown$": 0
+    }
+  ],
+
+  "SortedPeople": [
+    {
+      "Id": 0,
+      "Name": "",
+      "ButtonUp$": 0,
+      "ButtonDown$": 0
+    }
+  ],
+  "$SortedPeople": { "Bind": "SortedPeople" }
+}

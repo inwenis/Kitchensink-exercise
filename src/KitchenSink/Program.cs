@@ -44,8 +44,7 @@ namespace KitchenSink
             Handle.GET("/KitchenSink/partial/button", () => new ButtonPage());
             Handle.GET("/KitchenSink/button", () => WrapPage<ButtonPage>("/KitchenSink/partial/button"));
 
-            Handle.GET("/KitchenSink/partial/breadcrumb",
-                () => { return Db.Scope(() => { return new BreadcrumbPage(); }); });
+            Handle.GET("/KitchenSink/partial/breadcrumb", () => { return Db.Scope(() => { return new BreadcrumbPage(); }); });
             Handle.GET("/KitchenSink/breadcrumb", () => WrapPage<BreadcrumbPage>("/KitchenSink/partial/breadcrumb"));
 
             Handle.GET("/KitchenSink/partial/chart", () => new ChartPage());
@@ -55,8 +54,7 @@ namespace KitchenSink
             Handle.GET("/KitchenSink/checkbox", () => WrapPage<CheckboxPage>("/KitchenSink/partial/checkbox"));
 
             Handle.GET("/KitchenSink/partial/togglebutton", () => new ToggleButtonPage());
-            Handle.GET("/KitchenSink/togglebutton",
-                () => WrapPage<ToggleButtonPage>("/KitchenSink/partial/togglebutton"));
+            Handle.GET("/KitchenSink/togglebutton", () => WrapPage<ToggleButtonPage>("/KitchenSink/partial/togglebutton"));
 
             Handle.GET("/KitchenSink/partial/datagrid", () => new DatagridPage());
             Handle.GET("/KitchenSink/datagrid", () => WrapPage<DatagridPage>("/KitchenSink/partial/datagrid"));
@@ -107,6 +105,9 @@ namespace KitchenSink
 
             Handle.GET("/KitchenSink/partial/text", () => new TextPage());
             Handle.GET("/KitchenSink/text", () => WrapPage<TextPage>("/KitchenSink/partial/text"));
+
+            Handle.GET("/KitchenSink/partial/SortableList", () => new SortableListPage());
+            Handle.GET("/KitchenSink/SortableList", () => WrapPage<SortableListPage>("/KitchenSink/partial/SortableList"));
 
             Handle.GET("/KitchenSink/partial/textarea", () => new TextareaPage());
             Handle.GET("/KitchenSink/textarea", () => WrapPage<TextareaPage>("/KitchenSink/partial/textarea"));

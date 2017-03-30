@@ -1,0 +1,62 @@
+﻿<link rel="import" href="/sys/polymer/polymer.html">
+
+<template>
+    <template is="dom-bind">
+        <input type="text" value="{{model.XYZInput$::input}}" placeholder="Name" class="form-control kitchensink-test-name-input">
+        <h1>h1 here: {{model.XYZInput$}}</h1>
+        <h2>h2 here: {{model.XYZReaction}}</h2>
+        <br/>
+<!--        <table class="table table-striped">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Name</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <template is="dom-repeat" items="{{model.People}}">-->
+<!--                <tr>-->
+<!--                    <td>{{item.Name}}</td>-->
+<!--                    <td>-->
+<!--                        {{item.ButtonUp$}}-->
+<!--                        <button class="btn btn-sm btn-default" value="{{item.ButtonUp$::click}}" onclick="++this.value;">Button (function)</button>-->
+<!--                        <button class="btn btn-sm btn-default" value="{{item.ButtonUp$::click}}" onclick="++this.value;">Button2 (function)</button>-->
+<!--                    </td>-->
+<!--                    <td>{{item.ButtonDown}}</td>-->
+<!--                </tr>-->
+<!--            </template>-->
+<!--            </tbody>-->
+<!--        </table>-->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name sorted</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template is="dom-repeat" items="{{model.SortedPeople}}">
+                    <tr>
+                        <td>{{item.Name}}</td>
+                        <td>
+                            {{item.ButtonUp$}}
+                            <button class="btn btn-sm btn-default" value="{{item.ButtonUp$::click}}" onclick="++this.value;">Up (function)</button>
+                        </td>
+                        <td>
+                            {{item.ButtonDown$}}
+                            <button class="btn btn-sm btn-default" value="{{item.ButtonDown$::click}}" onclick="++this.value;">Down (function)</button>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template>
+    <script>
+        (function () {
+            var script = document._currentScript || document.currentScript;
+            var template = script.previousElementSibling;
+
+            template.onAddCarrotsClick = function (i) {
+                template.set("model.AddCarrots$", ++template.model.People[i].ButtonUp$);
+            };
+        })();
+    </script>
+</template>
