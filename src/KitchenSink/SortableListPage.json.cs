@@ -31,42 +31,35 @@ namespace KitchenSink
         public void MoveUp(Person person)
         {
             if (person.Position == 0) return;
-
-            var oldPosition = person.Position;
-            var newPosition = person.Position - 1;
-            var currentPersonOnNewPosition = People.Single(p => p.Position == newPosition);
-
-            person.Position = newPosition;
-            currentPersonOnNewPosition.Position = oldPosition;
-
+            ChangePosition(person, -1);
             Transaction.Commit();
-
-            var orderedPeople = People.OrderBy(p => p.Position).ToArray();
-            People.Clear();
-            foreach (var p in orderedPeople)
-            {
-                this.People.Add(p);
-            }
+            ReorderPeopleList();
         }
 
         public void MoveDown(Person person)
         {
             if (person.Position == People.Count - 1) return;
+            ChangePosition(person, +1);
+            Transaction.Commit();
+            ReorderPeopleList();
+        }
 
+        private void ChangePosition(Person person, int changePositionBy)
+        {
             var oldPosition = person.Position;
-            var newPosition = person.Position + 1;
-
+            var newPosition = person.Position + changePositionBy;
             var currentPersonOnNewPosition = People.Single(p => p.Position == newPosition);
             person.Position = newPosition;
             currentPersonOnNewPosition.Position = oldPosition;
+        }
 
-            Transaction.Commit();
-
+        private void ReorderPeopleList()
+        {
             var orderedPeople = People.OrderBy(p => p.Position).ToArray();
             People.Clear();
-            foreach (var p in orderedPeople)
+            foreach (var person in orderedPeople)
             {
-                this.People.Add(p);
+                People.Add(person);
             }
         }
     }
