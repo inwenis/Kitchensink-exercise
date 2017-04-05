@@ -15,7 +15,7 @@ namespace KitchenSink
     {
         void Handle(Input.ButtonUp action)
         {
-            var sortableListPage = (SortableListPage) Parent.Parent;
+            var sortableListPage = (SortableListPage)Parent.Parent;
             sortableListPage.MoveUp(Data);
         }
     }
@@ -24,6 +24,8 @@ namespace KitchenSink
     {
         public void MoveUp(Person person)
         {
+            if (person.Position == 0) return;
+
             var oldPosition = person.Position;
             var newPosition = person.Position - 1;
             var currentPersonOnNewPosition = People.Single(p => p.Position == newPosition);
