@@ -46,9 +46,14 @@ namespace KitchenSink
 
         public void MoveUp(Person person)
         {
-            person.Position++;
+            person.Position--;
             Transaction.Commit();
-
+            var ordered = this.People.OrderBy(p => p.Position).ToArray();
+            this.People.Clear();
+            foreach (var p in ordered)
+            {
+                this.People.Add(p);
+            }
         }
 
 
