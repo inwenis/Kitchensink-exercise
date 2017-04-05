@@ -2,32 +2,23 @@
 
 <template>
     <template is="dom-bind">
-        <input type="text" value="{{model.XYZInput$::input}}" placeholder="Name" class="form-control kitchensink-test-name-input">
-        <h1>h1 here: {{model.XYZInput$}}</h1>
-        <h2>h2 here: {{model.XYZReaction}}</h2>
-        <br />
-        <button value="{{model.SaveTrigger$::click}}" onmousedown="++this.value">Do something</button>
+        
+        <h1>Sortable List</h1>
+
+        <p class="lead">My coding exercise for Starcounter.</p>
+
         <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name sorted</th>
-                </tr>
-            </thead>
             <tbody>
-                <template is="dom-repeat" items="{{model.People}}">
-                    <tr>
-                        <td>{{item.Position}}</td>
-                        <td>{{item.Name}}</td>
-                        <td>
-                            {{item.ButtonUp$}}
-                            <button class="btn btn-sm btn-default" value="{{item.ButtonUp$::click}}" onclick="++this.value;">Up (function)</button>
-                        </td>
-                        <td>
-                            {{item.ButtonDown$}}
-                            <button class="btn btn-sm btn-default" value="{{item.ButtonDown$::click}}" onclick="++this.value;">Down (function)</button>
-                        </td>
-                    </tr>
-                </template>
+            <template is="dom-repeat" items="{{model.People}}">
+                <tr>
+                    <td>{{item.Position}}</td>
+                    <td>{{item.Name}}</td>
+                    <td><button class="btn btn-sm btn-default" value="{{item.ButtonUp$::click}}" onclick="++this.value;">Up</button>
+                    </td>
+                    <td><button class="btn btn-sm btn-default" value="{{item.ButtonDown$::click}}" onclick="++this.value;">Down</button>
+                    </td>
+                </tr>
+            </template>
             </tbody>
         </table>
     </template>

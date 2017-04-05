@@ -1,9 +1,5 @@
 {
   "Html": "/KitchenSink/SortableListPage.html",
-  "XYZInput$": "just some text",
-  "XYZReaction": "",
-  "$XYZReaction": { "Bind": "DoSomeOpetarions" },
-  "SaveTrigger$": 0,
   "People": [
     {
       "Name": "",
