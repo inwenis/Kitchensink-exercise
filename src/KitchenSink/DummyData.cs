@@ -48,6 +48,16 @@ namespace KitchenSink
                     new GroceryProduct { Name = "Milk", Price = 5 };
                     new GroceryProduct { Name = "Boiled Mutton", Price = 7 };
                 }
+
+                // For SortableList page
+                if (Db.SQL<Person>("SELECT p FROM Person p").First == null)
+                {
+                    new Person { Name = "Filip",   Position = 0, };
+                    new Person { Name = "Mietek",  Position = 1, };
+                    new Person { Name = "Zbyszek", Position = 2, };
+                    new Person { Name = "Ada",     Position = 3, };
+                    new Person { Name = "Klara",   Position = 4, };
+                }
             });
         }
     }

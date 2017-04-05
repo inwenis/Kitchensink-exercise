@@ -106,7 +106,37 @@ namespace KitchenSink
             Handle.GET("/KitchenSink/partial/text", () => new TextPage());
             Handle.GET("/KitchenSink/text", () => WrapPage<TextPage>("/KitchenSink/partial/text"));
 
-            Handle.GET("/KitchenSink/partial/SortableList", () => new SortableListPage());
+            Handle.GET("/KitchenSink/partial/SortableList", () =>
+            {
+                return Db.Scope(() =>
+                {
+                    var persons = Db.SQL<Person>("SELECT p FROM Person p");
+                    var json = new SortableListPage();
+
+                    json.People.Clear();
+                    foreach (var person in persons)
+                    {
+                        var expenseJson = Self.GET("/KitchenSink/partial/person/" + person.GetObjectID());
+                        json.People.Add((SortableListPage.PeopleElementJson) expenseJson);
+                    }
+
+                    if (Session.Current == null)
+                    {
+                        Session.Current = new Session(SessionOptions.PatchVersioning);
+                    }
+                    json.Session = Session.Current;
+                    return json;
+                });
+                //return new SortableListPage();
+            });
+
+            Handle.GET("/KitchenSink/partial/person/{?}", (string id) =>
+            {
+                var json = new SortableListPage.PeopleElementJson();
+                json.Data = DbHelper.FromID(DbHelper.Base64DecodeObjectID(id));
+                return json;
+            });
+
             Handle.GET("/KitchenSink/SortableList", () => WrapPage<SortableListPage>("/KitchenSink/partial/SortableList"));
 
             Handle.GET("/KitchenSink/partial/textarea", () => new TextareaPage());

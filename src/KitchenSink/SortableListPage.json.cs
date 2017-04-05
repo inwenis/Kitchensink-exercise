@@ -3,6 +3,15 @@ using Starcounter;
 
 namespace KitchenSink
 {
+    [Database]
+    public class Person
+    {
+        public int Position;
+        public string Name;
+//        public QueryResultRows<Expense> Spendings => Db.SQL<Expense>("SELECT e FROM Expense e WHERE e.Spender = ?", this);
+//        public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Expense e WHERE e.Spender = ?", this).First;
+    }
+
     partial class SortableListPage : Json
     {
         public string DoSomeOpetarions
@@ -17,43 +26,43 @@ namespace KitchenSink
             }
         }
 
-        protected override void OnData()
-        {
-            base.OnData();
-
-            //TablePage.PetsElementJson pet;
-            SortableListPage.PeopleElementJson person;
-
-            person = this.People.Add();
-            person.Id = 1;
-            person.Name = "Filip";
-            person.ButtonUp = 0;
-            person.ButtonDown = 0;
-
-            person = this.People.Add();
-            person.Id = 2;
-            person.Name = "Mietek";
-            person.ButtonUp = 0;
-            person.ButtonDown = 0;
-
-            person = this.People.Add();
-            person.Id = 3;
-            person.Name = "Zbyszek";
-            person.ButtonUp = 0;
-            person.ButtonDown = 0;
-
-            person = this.People.Add();
-            person.Id = 4;
-            person.Name = "Ada";
-            person.ButtonUp = 0;
-            person.ButtonDown = 0;
-
-            person = this.People.Add();
-            person.Id = 5;
-            person.Name = "Klara";
-            person.ButtonUp = 0;
-            person.ButtonDown = 0;
-        }
+//        protected override void OnData()
+//        {
+//            base.OnData();
+//
+//            //TablePage.PetsElementJson pet;
+//            SortableListPage.PeopleElementJson person;
+//
+//            person = this.People.Add();
+//            person.Id = 1;
+//            person.Name = "Filip";
+//            person.ButtonUp = 0;
+//            person.ButtonDown = 0;
+//
+//            person = this.People.Add();
+//            person.Id = 2;
+//            person.Name = "Mietek";
+//            person.ButtonUp = 0;
+//            person.ButtonDown = 0;
+//
+//            person = this.People.Add();
+//            person.Id = 3;
+//            person.Name = "Zbyszek";
+//            person.ButtonUp = 0;
+//            person.ButtonDown = 0;
+//
+//            person = this.People.Add();
+//            person.Id = 4;
+//            person.Name = "Ada";
+//            person.ButtonUp = 0;
+//            person.ButtonDown = 0;
+//
+//            person = this.People.Add();
+//            person.Id = 5;
+//            person.Name = "Klara";
+//            person.ButtonUp = 0;
+//            person.ButtonDown = 0;
+//        }
 
         public void ReOrder()
         {
@@ -87,7 +96,6 @@ namespace KitchenSink
                 }
                 guyToBeMoved.ButtonDown = 0;
             }
-            
         }
 
         public Arr<PeopleElementJson> SortedPeople
