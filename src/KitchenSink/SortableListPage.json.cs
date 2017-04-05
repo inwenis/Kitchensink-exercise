@@ -18,6 +18,12 @@ namespace KitchenSink
             var sortableListPage = (SortableListPage)Parent.Parent;
             sortableListPage.MoveUp(Data);
         }
+
+        void Handle(Input.ButtonDown action)
+        {
+            var sortableListPage = (SortableListPage)Parent.Parent;
+            sortableListPage.MoveDown(Data);
+        }
     }
 
     partial class SortableListPage : Json
@@ -30,6 +36,27 @@ namespace KitchenSink
             var newPosition = person.Position - 1;
             var currentPersonOnNewPosition = People.Single(p => p.Position == newPosition);
 
+            person.Position = newPosition;
+            currentPersonOnNewPosition.Position = oldPosition;
+
+            Transaction.Commit();
+
+            var orderedPeople = People.OrderBy(p => p.Position).ToArray();
+            People.Clear();
+            foreach (var p in orderedPeople)
+            {
+                this.People.Add(p);
+            }
+        }
+
+        public void MoveDown(Person person)
+        {
+            if (person.Position == People.Count - 1) return;
+
+            var oldPosition = person.Position;
+            var newPosition = person.Position + 1;
+
+            var currentPersonOnNewPosition = People.Single(p => p.Position == newPosition);
             person.Position = newPosition;
             currentPersonOnNewPosition.Position = oldPosition;
 
