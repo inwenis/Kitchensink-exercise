@@ -114,7 +114,8 @@ namespace KitchenSink
                     var json = new SortableListPage {People = {Data = persons}};
                     if (Session.Current == null)
                     {
-                        Session.Current = new Session(SessionOptions.PatchVersioning);
+//                        Session.Current = new Session(SessionOptions.PatchVersioning);
+                        Session.Current = new Session();
                     }
                     json.Session = Session.Current;
                     return json;

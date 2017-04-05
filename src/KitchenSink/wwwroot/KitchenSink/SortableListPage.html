@@ -13,9 +13,17 @@
                 <tr>
                     <td>{{item.Position}}</td>
                     <td>{{item.Name}}</td>
-                    <td><button class="btn btn-sm btn-default" value="{{item.ButtonUp$::click}}" onclick="++this.value;">Up</button>
+                    <td>
+                        <!-- for some reason the svg buttons do not work as expected so i'm leacing this for now-->
+                        <button class="btn btn-sm btn-default" value="{{item.ButtonUp$::click}}" onclick="++this.value;"><img src="/KitchenSink/images/ThumbUp.svg"></button>
+
+                        <span class="btn" select="{{item.ButtonUp$::click}}" onmousedown="++this.select">up</span>
+                        
+                        <span class="btn" select="{{item.ButtonUp$::click}}" onmousedown="++this.select"><p><img src="/KitchenSink/images/ThumbUp.svg"></p></span>
+
                     </td>
-                    <td><button class="btn btn-sm btn-default" value="{{item.ButtonDown$::click}}" onclick="++this.value;">Down</button>
+                    <td>
+                        <button class="btn btn-sm btn-default" value="{{item.ButtonDown$::click}}" onclick="++this.value;"><img src="/KitchenSink/images/ThumbDown.svg"></button>
                     </td>
                 </tr>
             </template>
