@@ -111,14 +111,19 @@ namespace KitchenSink
                 return Db.Scope(() =>
                 {
                     var persons = Db.SQL<Person>("SELECT p FROM Person p");
+                    var personsOrdered = persons.OrderBy(p => p.Position);
                     var json = new SortableListPage();
-
-                    json.People.Clear();
-                    foreach (var person in persons)
-                    {
-                        var expenseJson = Self.GET("/KitchenSink/partial/person/" + person.GetObjectID());
-                        json.People.Add((SortableListPage.PeopleElementJson) expenseJson);
-                    }
+                    json.People.Data = personsOrdered;
+//                    json.People.Clear();
+//                    foreach (var person in persons.OrderBy(p => p.Position))
+//                    {
+//                        var personJson = (PersonJson) Self.GET("/KitchenSink/partial/person/" + person.GetObjectID());
+//                        var peopleElementJson = json.People.Add();
+//                        peopleElementJson.Name = personJson.Name;
+//                        peopleElementJson.Position = personJson.Position;
+//                        peopleElementJson.ButtonUp = 0;
+//                        peopleElementJson.ButtonDown = 0;
+//                    }
 
                     if (Session.Current == null)
                     {
@@ -132,7 +137,7 @@ namespace KitchenSink
 
             Handle.GET("/KitchenSink/partial/person/{?}", (string id) =>
             {
-                var json = new SortableListPage.PeopleElementJson();
+                var json = new PersonJson();
                 json.Data = DbHelper.FromID(DbHelper.Base64DecodeObjectID(id));
                 return json;
             });

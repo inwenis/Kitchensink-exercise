@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Starcounter;
 
@@ -12,8 +13,58 @@ namespace KitchenSink
 //        public decimal CurrentBalance => Db.SQL<decimal>("SELECT SUM(e.Amount) FROM Expense e WHERE e.Spender = ?", this).First;
     }
 
+    //BreadcrumbPageBreadcrumbsElement
+
+    [SortableListPage_json.People]
+    partial class SortableListPagePeopleElement: Json, IBound<Person>
+    {
+        void Handle(Input.ButtonUp action)
+        {
+            Data.Name = "winner";
+
+            var sortableListPage = (SortableListPage) Parent.Parent;
+            sortableListPage.MoveUp(Data);
+
+            //if i am not top
+            //my position ++
+            //get the guy above me
+            //his position --
+
+            Transaction.Commit();
+        }
+    }
+
     partial class SortableListPage : Json
     {
+        public void SetActiveItem(TreeItem treeItem, bool isAdd = false)
+        {
+//            RebuildBreadcrumb(treeItem, isAdd);
+//            CurrentTreeItem.Data = treeItem;
+//            CurrentTreeItem.IsAdd = isAdd;
+//            CurrentTreeItem.ParentName = treeItem.Parent.Name;
+        }
+
+        public void MoveUp(Person person)
+        {
+            person.Position++;
+            Transaction.Commit();
+
+        }
+
+
+        void Handle(Input.SaveTrigger action)
+        {
+            
+            this.People[0].Name = "aaaa";
+            Transaction.Commit();
+        }
+
+//        void Handle(Input.CancelTrigger action)
+//        {
+//            Transaction.Rollback();
+//            RefreshExpenses(this.Data.Spendings);
+//        }
+
         public string DoSomeOpetarions
         {
             get
@@ -66,48 +117,57 @@ namespace KitchenSink
 
         public void ReOrder()
         {
-            var guyToBeMoved = this.People.Single(p => p.ButtonUp == 1 || p.ButtonDown == 1);
-            var indexOfGuyToBeMoved = this.People.IndexOf(guyToBeMoved);
-            if (guyToBeMoved.ButtonUp == 1)
-            {
-                if (indexOfGuyToBeMoved == 0)
-                {
-                    //nothing to do
-                }
-                else
-                {
-                    var moveTo = indexOfGuyToBeMoved - 1;
-                    this.People.Remove(guyToBeMoved);
-                    this.People.Insert(moveTo, guyToBeMoved);
-                }
-                guyToBeMoved.ButtonUp = 0;
-            }
-            else //if (guyToBeMoved.ButtonDown == 1)
-            {
-                if (indexOfGuyToBeMoved == this.People.Count - 1)
-                {
-                    //nothing to do
-                }
-                else
-                {
-                    var moveTo = indexOfGuyToBeMoved + 1;
-                    this.People.Remove(guyToBeMoved);
-                    this.People.Insert(moveTo, guyToBeMoved);
-                }
-                guyToBeMoved.ButtonDown = 0;
-            }
+            //var guyToBeMoved = this.People.Single(p => p.ButtonUp == 1 || //p.ButtonDown == 1);
+            //var indexOfGuyToBeMoved = this.People.IndexOf(guyToBeMoved);
+            //if (guyToBeMoved.ButtonUp == 1)
+            //{
+            //    if (indexOfGuyToBeMoved == 0)
+            //    {
+            //        //nothing to do
+            //    }
+            //    else
+            //    {
+            //        guyToBeMoved.Position--;
+            //        People.ElementAt(indexOfGuyToBeMoved - 1).Position++;
+            //    }
+            //    guyToBeMoved.ButtonUp = 0;
+            //}
+            //else //if (guyToBeMoved.ButtonDown == 1)
+            //{
+            //    if (indexOfGuyToBeMoved == this.People.Count - 1)
+            //    {
+            //        //nothing to do
+            //    }
+            //    else
+            //    {
+            //        guyToBeMoved.Position++;
+            //        People.ElementAt(indexOfGuyToBeMoved + 1).Position--;
+            //    }
+            //    guyToBeMoved.ButtonDown = 0;
+            //}
+            //Transaction.Commit();
         }
 
-        public Arr<PeopleElementJson> SortedPeople
-        {
-            get
-            {
-                if (this.People.Any(p=> p.ButtonUp == 1 || p.ButtonDown == 1))
-                {
-                    ReOrder();
-                }
-                return People;
-            }
-        }
+        //        public Arr<Json> SortedPeople
+        //        {
+        //            get
+        //            {
+        ////                if (this.People.Any(p=> p.ButtonUp == 1 || p.ButtonDown == 1))
+        ////                {
+        ////                    ReOrder();
+        ////                }
+        //
+        //                //var tempCopy = People.ToList();
+        //                //People.Clear();
+        //                //foreach (var peopleElementJson in tempCopy.OrderBy(p => //p.Position))
+        //                //{
+        //                //    People.Add(peopleElementJson);
+        //                //}
+        //
+        //                return this.People;
+        //            }
+        //        }
+
+        
     }
 }
