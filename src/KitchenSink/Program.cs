@@ -111,14 +111,7 @@ namespace KitchenSink
                 return Db.Scope(() =>
                 {
                     var persons = Db.SQL<Person>("SELECT p FROM Person p ORDER BY p.Position");
-                    var json = new SortableListPage {People = {Data = persons}};
-                    if (Session.Current == null)
-                    {
-//                        Session.Current = new Session(SessionOptions.PatchVersioning);
-                        Session.Current = new Session();
-                    }
-                    json.Session = Session.Current;
-                    return json;
+                    return new SortableListPage {People = {Data = persons}};
                 });
             });
 
