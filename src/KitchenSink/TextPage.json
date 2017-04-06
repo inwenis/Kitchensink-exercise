@@ -6,7 +6,5 @@
   "NameReaction": "",
   "$NameReaction": { "Bind": "CalculatedNameReaction" },
 
-  "NameLive$": "",
-  "XXX": "",
-  "$XXX": { "Bind": "CalculatedNameLiveReaction" }
+  "NameLive$": ""
 }
